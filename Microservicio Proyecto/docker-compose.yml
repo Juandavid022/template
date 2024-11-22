@@ -1,9 +1,24 @@
+version: "3.8"
 services:
   web:
     build: .
     ports:
-      - "4001:4001"
+      - 4001
+  web2:
+    build: .
+    ports:
+      - 4004
   redis:
     image: "redis:alpine"
   
+  balanceador-carga:
+    container_name: balanceador-carga
+    image: balanceador-carga:v1
+    build:
+      context: ./balanceador
+    ports:
+      - "4003:80"
+
+networks:
+  proyectos-app :
   
